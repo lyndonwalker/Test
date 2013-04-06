@@ -30,7 +30,7 @@ namespace SerialLed
         public MainWindow()
         {
             InitializeComponent();
-            port = new SerialPort("COM1");
+            port = new SerialPort("COM7");
             port.Open();
             onState = false;
         }
@@ -68,16 +68,15 @@ namespace SerialLed
             {
                 button2.Background = Brushes.Blue;
                 this.onState = true;
-                port.RtsEnable = this.onState;
                 this.theTimer.Interval = TimeSpan.FromMilliseconds(this.onTime);
             }
             else
             {
                 button2.Background = Brushes.Gray;
                 this.onState = false;
-                port.RtsEnable = this.onState;
                 this.theTimer.Interval = TimeSpan.FromMilliseconds(this.offTime);
             }
+            port.DtrEnable = this.onState;
         }
     }
 }
